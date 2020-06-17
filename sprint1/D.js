@@ -7,10 +7,6 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', (line) => {
-  console.log(E(line));
-  rl.close();
-});
-
-function E(num) {
-  return Number(num).toString(2);
-}
+    console.log(D(line));
+    rl.close();
+  });

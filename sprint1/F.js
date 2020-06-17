@@ -7,32 +7,27 @@ const rl = readline.createInterface({
 });
 
 let i = 0;
-let fn = B;
-fn.i = 0;
+let lengthId = 0;
 
 rl.on('line', (line) => {
-  i++;
   const arr = line.split(' ').map(Number);
 
+  i++;
+
   if (i === 1) {
-    fn = fn(arr);
+    lengthId = arr[0];
   }
 
   if (i === 2) {
-    fn(arr[0]);
+    console.log(F(arr));
     rl.close();
   }
 });
 
-function B(M) {
-  return (k) => {
-    const result = [];
-    M.forEach((x) => {
-      counts[x] = (counts[x] || 0) + 1;
-    });
-
-    for (let i = 1; i <= k; i++) {
-      M.filter((value) => value === i).length;
+function F(arr) {
+  for (let v of arr) {
+    if (arr.filter((x) => x === v).length > 1) {
+      return v;
     }
-  };
+  }
 }

@@ -6,4 +6,11 @@ const rl = readline.createInterface({
   terminal: false,
 });
 
-module.exports = rl;
+rl.on('line', (line) => {
+  console.log(E(line));
+  rl.close();
+});
+
+function E(num) {
+  return Number(num).toString(2);
+}

@@ -19,37 +19,7 @@ rl.on('line', (line) => {
 });
 
 function I() {
-  let [maxNum, minNum] = nums;
-
-  if (minNum.length !== maxNum.length) {
-    maxNum = maxNum.length > minNum.length ? maxNum : minNum;
-    minNum = maxNum.length > minNum.length ? minNum : maxNum;
-  }
-
-  maxNum = maxNum.padStart(maxNum.length + 1, '0');
-  minNum = minNum.padStart(maxNum.length, '0');
-
-  const obj = {};
-  let result = '';
-
-  for (let i = maxNum.length - 1; i >= 0; i--) {
-    if ((obj[i] || 0) + Number(maxNum[i]) + Number(minNum[i]) === 0) {
-      result = '0' + result;
-      obj[i - 1] = 0;
-    }
-    if ((obj[i] || 0) + Number(maxNum[i]) + Number(minNum[i]) === 1) {
-      result = '1' + result;
-      obj[i - 1] = 0;
-    }
-    if ((obj[i] || 0) + Number(maxNum[i]) + Number(minNum[i]) === 2) {
-      result = '0' + result;
-      obj[i - 1] = 1;
-    }
-    if ((obj[i] || 0) + Number(maxNum[i]) + Number(minNum[i]) === 3) {
-      result = '1' + result;
-      obj[i - 1] = 1;
-    }
-  }
-
-  return result;
+  const [num1, num2] = nums;
+  const sum = parseInt(num1, 2) + parseInt(num2, 2);
+  return Number(sum).toString(2);
 }

@@ -6,16 +6,12 @@ const rl = readline.createInterface({
   terminal: false,
 });
 
-let i = 0;
-
 rl.on('line', (line) => {
-  i++;
-  if (i === 2) {
-    console.log(D(line));
-    rl.close();
-  }
+  console.log(K(line));
+  rl.close();
 });
 
-function D(line) {
-  return line.replace(/ 0+/g, '');
+function K(num) {
+  const doubleNum = Number(num).toString(2);
+  return doubleNum.split('0').join('').length;
 }

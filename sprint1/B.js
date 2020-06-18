@@ -7,32 +7,46 @@ const rl = readline.createInterface({
 });
 
 let i = 0;
-let fn = B;
-fn.i = 0;
+const input = [];
 
 rl.on('line', (line) => {
   i++;
-  const arr = line.split(' ').map(Number);
 
-  if (i === 1) {
-    fn = fn(arr);
-  }
+  input.push(line);
 
   if (i === 2) {
-    fn(arr[0]);
+    console.log(B());
     rl.close();
   }
 });
 
-function B(M) {
-  return (k) => {
-    const result = [];
-    M.forEach((x) => {
-      counts[x] = (counts[x] || 0) + 1;
-    });
+function B() {
+  const [list, k] = input;
+  const map = new Map();
 
-    for (let i = 1; i <= k; i++) {
-      M.filter((value) => value === i).length;
+  for (let v of list) {
+    if (v === ' ') continue;
+    if (!map.has(v)) {
+      map.set(v, 1);
+    } else {
+      map.set(v, map.get(v) + 1);
     }
-  };
+  }
+
+  const entries = [...map.entries()];
+
+  for (let i = 0; i < entries.length - 1; i++) {
+    for (let j = 0; j < entries.length - 1 - i; j++) {
+      const a = entries[j + 1];
+      const b = entries[j];
+
+      if (a[1] > b[1]) {
+        [a, b] = [b, a];
+      }
+    }
+  }
+
+  entries.length = k;
+
+  return entries.map((arr) => arr[0]).join(' ');
 }

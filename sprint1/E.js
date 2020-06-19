@@ -11,6 +11,22 @@ rl.on('line', (line) => {
   rl.close();
 });
 
-function E(num) {
-  return Number(num).toString(2);
+// function E(num) {
+//   return Number(num).toString(2);
+// }
+
+function E(line){
+  return transformToBinary(Number(line));
+}
+
+function transformToBinary (number) {
+  const divider = 2;
+  let binaryNumber = ``;
+  
+  while (number > 0) {
+    binaryNumber += number % divider;
+    number = parseInt(number / divider);
+  }
+  
+  return binaryNumber.split(``).reverse().join(``); 
 }

@@ -24,10 +24,17 @@ rl.on('line', (line) => {
   }
 });
 
-function F(arr) {
-  for (let v of arr) {
-    if (arr.filter((x) => x === v).length > 1) {
-      return v;
-    }
-  }
+// function F(arr) {
+//   for (let v of arr) {
+//     if (arr.filter((x) => x === v).length > 1) {
+//       return v;
+//     }
+//   }
+// }
+
+function F(arr){
+  const sum1 = arr.reduce((total, item) => total + item, 0);
+  const arrWithoutDouble = [...new Set(arr)];
+  const sum2 = arrWithoutDouble.reduce((total, item) => total + item, 0);
+  return sum1 - sum2;
 }

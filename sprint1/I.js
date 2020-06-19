@@ -21,5 +21,9 @@ rl.on('line', (line) => {
 function I() {
   const [num1, num2] = nums;
   const sum = parseInt(num1, 2) + parseInt(num2, 2);
-  return Number(sum).toString(2);
+  return E(sum);
+}
+
+function E(num) {
+  return Number(num).toString(2);
 }

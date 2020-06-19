@@ -35,16 +35,20 @@ function B() {
 
   const entries = [...map.entries()];
 
+  console.log(entries);
+
   for (let i = 0; i < entries.length - 1; i++) {
     for (let j = 0; j < entries.length - 1 - i; j++) {
-      const a = entries[j + 1];
-      const b = entries[j];
+      let a = entries[j + 1];
+      let b = entries[j];
 
       if (a[1] > b[1]) {
         [a, b] = [b, a];
       }
     }
   }
+
+  console.log(entries);
 
   entries.length = k;
 

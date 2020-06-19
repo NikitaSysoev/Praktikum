@@ -11,11 +11,18 @@ let i = 0;
 rl.on('line', (line) => {
   i++;
   if (i === 2) {
-    console.log(D(line));
+    const arr = line.split(' ').map(Number);
+    console.log(D(arr));
     rl.close();
   }
 });
 
-function D(line) {
-  return line.replace(/ 0+/g, '');
+function D(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      arr.splice(i, 1);
+      --i;
+    }
+  }
+  return arr.join(' ');
 }

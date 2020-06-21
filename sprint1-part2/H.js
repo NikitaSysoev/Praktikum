@@ -26,5 +26,5 @@ rl.on('line', (line) => {
 });
 
 function H() {
-  list.logLinkedList()
+  list.logLinkedList();
 }

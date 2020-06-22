@@ -42,17 +42,14 @@ function Q() {
   //     }
   //   }
 
-  const deck = new Deck(10);
-  deck['push_front'](-855);
-  
-  deck['push_front'](720);
-
-  console.log(deck['pop_back']());
+  const deck = new Deck(6);
+  deck['push_front'](-201);
+  deck['push_back'](959);
+  deck['push_back'](102);
+  deck['push_front'](20);
+  // 
+  console.log(deck['pop_front']());
  
   console.log(deck['pop_back']());
-
-  deck['push_back'](844);
-  console.log(deck.queue)
-  console.log(deck['pop_back']());
-  deck['push_back'](823);
+  console.log(deck)
 }

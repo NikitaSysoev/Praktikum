@@ -6,6 +6,16 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', (line) => {
-  console.log(new Set(line).size);
+  C(line);
   process.exit(0);
 });
+
+function C(line) {
+  let result =''
+  for (let x of line) {
+    if(!result.includes(x)){
+      result += x; 
+    }
+  }
+  console.log(result.length);
+}

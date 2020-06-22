@@ -52,6 +52,7 @@ class StackMax extends Stack {
 class StackMaxEffective extends Stack {
   constructor() {
     super();
+    this.set = new Set();
   }
 
   getMax() {
@@ -60,7 +61,7 @@ class StackMaxEffective extends Stack {
 
   push(item) {
     const top = super.isEmpty() ? item : Math.max(item, this.getMax());
-    super.push({ top, item });
+    super.push(item);
   }
 
   get_max() {
@@ -71,7 +72,7 @@ class StackMaxEffective extends Stack {
     if (super.isEmpty()) {
       console.log('error');
     } else {
-      return super.pop().item;
+      return super.pop();
     }
   }
 }

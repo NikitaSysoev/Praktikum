@@ -7,23 +7,20 @@ const rl = readline.createInterface({
 });
 
 let i = 0;
-const nums = [];
+let line1 = '';
 
 rl.on('line', (line) => {
   i++;
-  nums.push(line);
+  if (i === 1) {
+    line1 = line;
+  }
   if (i === 2) {
-    console.log(I());
+    console.log(I(line1, line));
     rl.close();
   }
 });
 
-function I() {
-  const [num1, num2] = nums;
+function I(num1, num2) {
   const sum = parseInt(num1, 2) + parseInt(num2, 2);
-  return E(sum);
-}
-
-function E(num) {
-  return Number(num).toString(2);
+  return Number(sum).toString(2);
 }

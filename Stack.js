@@ -127,5 +127,4 @@ class StackSet {
   }
 }
 
-
 module.exports = { Stack, StackMax, StackMaxEffective, StackSet };

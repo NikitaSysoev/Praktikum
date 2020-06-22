@@ -11,18 +11,24 @@ let i = 0;
 rl.on('line', (line) => {
   i++;
   if (i === 2) {
-    const arr = line.split(' ').map(Number);
-    console.log(D(arr));
+    D(line);
     rl.close();
   }
 });
 
-function D(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === 0) {
-      arr.splice(i, 1);
-      --i;
+function D(line) {
+  let result = '';
+  let prevZero = false;
+  for (let s of line) {
+    if (s !== '0') {
+      if (prevZero === true) {
+        prevZero = false;
+      } else {
+        result += s;
+      }
+    } else {
+      prevZero = true;
     }
   }
-  return arr.join(' ');
+  console.log(result);
 }

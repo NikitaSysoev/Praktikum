@@ -16,19 +16,27 @@ rl.on('line', (line) => {
   }
 });
 
+// function D(line) {
+//   const result = [];
+//   for (let x of line) {
+//     if (x !== '0') {
+//       result.push(x);
+//     }
+//   }
+//   console.log(result.join(''))
+// }
+
 function D(line) {
-  let result = '';
-  let prevZero = false;
-  for (let s of line) {
-    if (s !== '0') {
-      if (prevZero === true) {
-        prevZero = false;
-      } else {
-        result += s;
-      }
-    } else {
-      prevZero = true;
-    }
-  }
+  let flag = false;
+  const result = line
+    .split(' ')
+    .map((x) => {
+      if (x.length > 1) {
+        return [...x].filter((y) => y !== '0').join('');
+      } else if (x !== '0') {
+        return x;
+      } 
+    })
+    .join(' ').split(' ');
   console.log(result);
 }

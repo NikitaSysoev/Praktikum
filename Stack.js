@@ -22,6 +22,10 @@ class Stack {
   isEmpty() {
     return this.size() === 0;
   }
+
+  reverse() {
+    this.items.reverse();
+  }
 }
 
 class StackMax extends Stack {
@@ -128,4 +132,48 @@ class StackSet {
   }
 }
 
-module.exports = { Stack, StackMax, StackMaxEffective, StackSet };
+class QueueX extends Stack {
+  constructor() {
+    super();
+    this.size = 0;
+  }
+
+  peek() {
+    return this.get_size() ? this.items[this.items.length - 1] : null;
+  }
+
+  get_size() {
+    return this.size;
+  }
+
+  put(value) {
+    super.push({ value, prev: this.peek() });
+    this.size++;
+  }
+
+  get() {
+    if (this.get_size() === 0) {
+      return 'error';
+    }
+
+    let i = this.get_size();
+    let current = this.peek();
+    let result = null;
+
+    if (i === 1) {
+      result = current.value;
+      current = null;
+    } else {
+      while (current.prev.prev !== null) {
+        current = current.prev;
+      }
+      result = current.prev.value;
+      current.prev = null;
+    }
+
+    this.size--;
+    return result;
+  }
+}
+
+module.exports = { Stack, StackMax, StackMaxEffective, StackSet, QueueX };

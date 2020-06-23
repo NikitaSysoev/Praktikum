@@ -35,13 +35,13 @@ function hasCycle(head) {
   let current = head;
 
   while (current.next !== null) {
-    current.bad = true;
+    current.passed = true;
     current = current.next;
 
-    if (current.bad === true) {
+    if (current.passed === true) {
       break;
     }
   }
 
-  return current.bad ? 'True' : 'False';
+  return current.passed ? 'True' : 'False';
 }

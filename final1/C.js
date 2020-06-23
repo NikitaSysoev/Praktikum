@@ -1,5 +1,5 @@
 const readline = require('readline');
-const { Stack } = require('../Stack');
+const QueueS = require('../StackedQueue');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -7,16 +7,32 @@ const rl = readline.createInterface({
   terminal: false,
 });
 
+let i = 0;
+let n = 0;
+const commands = [];
+
 rl.on('line', (line) => {
-  console.log(A(line));
-  rl.close();
+  i++;
+  if (i === 1) {
+    n = Number(line);
+  }
+  if (i > 1) {
+    commands.push(line);
+  }
+  if (i === n + 1) {
+    C();
+    rl.close();
+  }
 });
 
-function A(str) {
-  const stack = new Stack();
-  const 
-
-  for(let x of str){
-
+function C() {
+  const q = new QueueS();
+  for (let str of commands) {
+    const [fn, arg] = str.split(' ');
+    if (fn === 'put') {
+      q[fn](arg);
+    } else {
+      console.log(q[fn]());
+    }
   }
 }

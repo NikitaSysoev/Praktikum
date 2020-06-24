@@ -31,7 +31,7 @@ class QueueS {
       const last = this.stack.pop();
       newStack.push(last);
     }
-    newStack.reverse();
+    newStack.items.reverse();
     this.stack = newStack;
 
     return result;

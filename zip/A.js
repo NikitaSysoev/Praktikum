@@ -1,5 +1,4 @@
 const readline = require('readline');
-const { Stack } = require('../Stack');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -11,6 +10,32 @@ rl.on('line', (line) => {
   A(line);
   rl.close();
 });
+
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+
+  push(item) {
+    this.items.push(item);
+  }
+
+  pop() {
+    return this.items.pop();
+  }
+
+  peek() {
+    return this.items[this.size() - 1];
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+}
 
 class StackX extends Stack {
   constructor() {

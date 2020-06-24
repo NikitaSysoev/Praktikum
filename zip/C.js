@@ -22,10 +22,6 @@ class Stack {
   isEmpty() {
     return this.size() === 0;
   }
-
-  reverse() {
-    this.items.reverse();
-  }
 }
 
 class QueueS {
@@ -59,7 +55,7 @@ class QueueS {
       const last = this.stack.pop();
       newStack.push(last);
     }
-    newStack.reverse();
+    newStack.items.reverse();
     this.stack = newStack;
 
     return result;

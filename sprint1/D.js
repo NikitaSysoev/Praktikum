@@ -16,27 +16,19 @@ rl.on('line', (line) => {
   }
 });
 
-// function D(line) {
-//   const result = [];
-//   for (let x of line) {
-//     if (x !== '0') {
-//       result.push(x);
-//     }
-//   }
-//   console.log(result.join(''))
-// }
-
 function D(line) {
-  let flag = false;
-  const result = line
-    .split(' ')
-    .map((x) => {
-      if (x.length > 1) {
-        return [...x].filter((y) => y !== '0').join('');
-      } else if (x !== '0') {
-        return x;
-      } 
-    })
-    .join(' ').split(' ');
+  let result = '';
+  for (let i = 0; i < line.length; i++) {
+    if (line[i] === '0') {
+      continue;
+    }
+    if (line[i] === ' ' && line[i - 1] === '0') {
+      continue;
+    }
+    if (line[i] === ' ' && line[i + 1] === '0' && i + 1 === line.length) {
+      continue;
+    }
+    result += line[i];
+  }
   console.log(result);
 }

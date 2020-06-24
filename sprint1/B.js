@@ -1,46 +1,28 @@
-const readline = require('readline');
+const fs = require('fs');
+const input = fs.readFileSync('input.txt', 'utf-8').split('\r\n');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
+const list = input[0].split(' ').map(Number);
+const k = Number(input[1]);
 
-let i = 0;
-let list = '';
+const map = {};
 
-rl.on('line', (line) => {
-  i++;
-
-  if (i === 1) {
-    list = line;
+for (let v of list) {
+  if (v === ' ') continue;
+  if (!map[v]) {
+    map[v] = 1;
+  } else {
+    map[v] = map[v] + 1;
   }
-
-  if (i === 2) {
-    console.log(B(list, line));
-    rl.close();
-  }
-});
-
-function B(list, k) {
-  const map = {};
-
-  for (let v of list) {
-    if (v === ' ') continue;
-    if (!map[v]) {
-      map[v] = 1;
-    } else {
-      map[v] = map[v] + 1;
-    }
-  }
-
-  const entries = Object.entries(map).sort(asc);
-
-  return entries
-    .map((arr) => arr[0])
-    .slice(0, k)
-    .join(' ');
 }
+
+const entries = Object.entries(map).sort(asc);
+
+const result = entries
+  .map((arr) => arr[0])
+  .slice(0, k)
+  .join(' ');
+
+console.log(result);
 
 function asc(a, b) {
   if (a[1] > b[1]) {

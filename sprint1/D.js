@@ -1,34 +1,14 @@
-const readline = require('readline');
+const fs = require('fs');
+const input = fs.readFileSync('input.txt', 'utf-8').split('\n');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
+const numbers = input[1].split(' ').map(Number);
 
-let i = 0;
+let result = '';
 
-rl.on('line', (line) => {
-  i++;
-  if (i === 2) {
-    D(line);
-    rl.close();
+numbers.forEach((number) => {
+  if (number) {
+    result += `${number} `;
   }
 });
 
-function D(line) {
-  let result = '';
-  for (let i = 0; i < line.length; i++) {
-    if (line[i] === '0') {
-      continue;
-    }
-    if (line[i] === ' ' && line[i - 1] === '0') {
-      continue;
-    }
-    if (line[i] === ' ' && line[i + 1] === '0' && i + 1 === line.length) {
-      continue;
-    }
-    result += line[i];
-  }
-  console.log(result);
-}
+console.log(result);

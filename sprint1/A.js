@@ -1,19 +1,9 @@
-const readline = require('readline');
+const fs = require('fs');
+const input = fs.readFileSync('input.txt', 'utf-8').split('\n');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-rl.on('line', (line) => {
-  console.log(A(line));
-  rl.close();
-});
+const [a, x, b, c] = input[0].split(' ').map(Number);
 
 // Сложность алгоритма O(1).
 // Количество элементарный операций не зависит от значений переменных x, y, c
-function A(str) {
-  const [a, x, b, c] = str.split(' ').map(Number);
-  return Math.pow(x, 2) * a + b * x + c;
-}
+const result = Math.pow(x, 2) * a + b * x + c;
+console.log(result);

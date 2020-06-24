@@ -23,8 +23,9 @@ wednesday.link(thursday);
 thursday.link(friday);
 friday.link(saturday);
 saturday.link(sunday);
+// sunday.link(monday);
 
-// sunday.link(monday)
+// monday.link(monday)
 // friday.link(friday);
 // saturday.link(friday)
 // friday.link(monday);

@@ -1,30 +1,12 @@
-const readline = require('readline');
+const fs = require('fs');
+const input = fs.readFileSync('input.txt', 'utf-8').split('\n');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
+const people = input[1].split(' ').map(Number);
+const map = new Map();
 
-let i = 0;
-
-rl.on('line', (line) => {
-  i++;
-  if (i === 2) {
-    console.log(J(line));
-    rl.close();
-  }
-});
-
-function J(line) {
-  const people = line.split(' ').map(Number);
-  const result = new Map();
-  for (let x of people) {
-    if (result.has(x)) {
-      result.delete(x);
-    } else {
-      result.set(x, x);
-    }
-  }
-  return [...result.values()][0];
+for (let x of people) {
+  map.has(x) ? map.delete(x) : map.set(x, x);
 }
+
+const result = [...map.values()][0];
+console.log(result);

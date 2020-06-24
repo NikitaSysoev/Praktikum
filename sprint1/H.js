@@ -1,17 +1,6 @@
-const readline = require('readline');
+const fs = require('fs');
+const input = fs.readFileSync('input.txt', 'utf-8').split('\r\n');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-rl.on('line', (line) => {
-  console.log(H(line));
-  rl.close();
-});
-
-function H(line) {
-  const word = line.toLowerCase().replace(/[\. ,:-]+/g, '');
-  return word === word.split('').reverse().join('') ? 'True' : 'False';
-}
+const word = input[0].toLowerCase().replace(/[\. ,:-]+/g, '');
+const result = word === word.split('').reverse().join('') ? 'True' : 'False';
+console.log(result);

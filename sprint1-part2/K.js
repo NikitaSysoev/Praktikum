@@ -10,7 +10,6 @@ const rl = readline.createInterface({
 let i = 0;
 let n = 0;
 const commands = [];
-const stack = new StackSet();
 
 rl.on('line', (line) => {
   i++;
@@ -27,6 +26,7 @@ rl.on('line', (line) => {
 });
 
 function K() {
+  const stack = new StackSet();
   for (let str of commands) {
     const arr = str.split(' ');
     if (arr[0] === 'size' || arr[0] === 'peek') {

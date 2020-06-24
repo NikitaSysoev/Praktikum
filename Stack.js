@@ -28,59 +28,6 @@ class Stack {
   }
 }
 
-class StackMax extends Stack {
-  constructor() {
-    super();
-  }
-
-  getMax() {
-    if (this.isEmpty()) {
-      return 'None';
-    }
-    return Math.max(...this.items);
-  }
-
-  get_max() {
-    console.log(this.getMax());
-  }
-
-  pop() {
-    if (this.isEmpty()) {
-      console.log('error');
-      return;
-    }
-    return super.pop();
-  }
-}
-
-class StackMaxEffective extends Stack {
-  constructor() {
-    super();
-    this.set = new Set();
-  }
-
-  getMax() {
-    return super.isEmpty() ? 'None' : super.peek().top;
-  }
-
-  push(item) {
-    const top = super.isEmpty() ? item : Math.max(item, this.getMax());
-    super.push(item);
-  }
-
-  get_max() {
-    console.log(this.getMax());
-  }
-
-  pop() {
-    if (super.isEmpty()) {
-      console.log('error');
-    } else {
-      return super.pop();
-    }
-  }
-}
-
 class StackSet {
   constructor() {
     this.set = new Set();
@@ -176,4 +123,4 @@ class QueueX extends Stack {
   }
 }
 
-module.exports = { Stack, StackMax, StackMaxEffective, StackSet, QueueX };
+module.exports = { Stack, StackSet, QueueX };

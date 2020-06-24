@@ -1,5 +1,5 @@
 const readline = require('readline');
-const { StackMax } = require('../Stack');
+const { Stack } = require('../Stack');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -10,7 +10,6 @@ const rl = readline.createInterface({
 let i = 0;
 let n = 0;
 const commands = [];
-const stack = new StackMax();
 
 rl.on('line', (line) => {
   i++;
@@ -26,7 +25,33 @@ rl.on('line', (line) => {
   }
 });
 
+class StackMax extends Stack {
+  constructor() {
+    super();
+  }
+
+  getMax() {
+    if (this.isEmpty()) {
+      return 'None';
+    }
+    return Math.max(...this.items);
+  }
+
+  get_max() {
+    console.log(this.getMax());
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      console.log('error');
+      return;
+    }
+    return super.pop();
+  }
+}
+
 function I() {
+  const stack = new StackMax();
   for (let str of commands) {
     const arr = str.split(' ');
     if (arr.length === 2) {

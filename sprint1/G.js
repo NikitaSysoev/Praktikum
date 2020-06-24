@@ -7,22 +7,34 @@ const rl = readline.createInterface({
 });
 
 let i = 0;
-const words = [];
+let w1 = '';
 
 rl.on('line', (line) => {
   i++;
 
-  words.push(line);
+  if (i === 1) {
+    w1 = line;
+  }
 
   if (i === 2) {
-    console.log(G());
+    console.log(G(w1, line));
     rl.close();
   }
 });
 
-function G() {
-  const [word1, word2] = words;
-  const w1 = [...word1.toLowerCase()].sort().join('');
-  const w2 = [...word2.toLowerCase()].sort().join('');
-  return w1 === w2 ? 'True' : 'False';
+function G(w1, w2) {
+  const map = new Map();
+
+  for (let s of w1) {
+    map.set(s, (map.get(s) || 0) + 1);
+  }
+
+  for (let s of w2) {
+    if (!map.get(s)) return 'False';
+    map.set(s, (map.get(s) || 0) - 1);
+  }
+
+  const result = [...map.values()].every((i) => i === 0);
+
+  return result ? 'True' : 'False';
 }

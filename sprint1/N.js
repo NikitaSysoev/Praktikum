@@ -1,21 +1,12 @@
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-rl.on('line', (line) => {
-  console.log(N(line));
-  rl.close();
-});
+const fs = require('fs');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
 Number.prototype.logx = function (x) {
   return Math.log(this) / Math.log(x);
 };
 
-function N(line) {
-  const num = Number(line).logx(4);
-  return Number.isInteger(num) ? 'True' : 'False';
-}
+const num = Number(input[0]).logx(4);
+const result = Number.isInteger(num) ? 'True' : 'False';
+
+console.log(result);

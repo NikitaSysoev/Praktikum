@@ -1,47 +1,54 @@
-const readline = require('readline');
-const { Stack } = require('../Stack');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-let i = 0;
-let n = 0;
-const commands = [];
-
-rl.on('line', (line) => {
-  i++;
-  if (i === 1) {
-    n = Number(line);
+class Stack {
+  constructor() {
+    this.last = null;
+    this.size = 0;
   }
-  if (i > 1) {
-    commands.push(line);
+
+  push(item) {
+    this.size++;
+    const prev = this.last;
+    const element = { prev, item };
+    this.last = element;
   }
-  if (i === n + 1) {
-    O();
-    rl.close();
+
+  pop() {
+    if (!this.isEmpty()) {
+      const element = this.last;
+      this.last = element.prev;
+      this.size--;
+      return element.item;
+    }
   }
-});
+
+  peek() {
+    return this.last.item;
+  }
+
+  size() {
+    return this.size;
+  }
+
+  isEmpty() {
+    return this.size === 0;
+  }
+}
 
 class StackMaxEffective extends Stack {
   constructor() {
     super();
-    this.set = new Set();
   }
 
   getMax() {
-    return super.isEmpty() ? 'None' : super.peek().top;
+    return super.isEmpty() ? 'None' : super.peek();
+  }
+
+  push(item) {
+    const top = super.isEmpty() ? item : Math.max(item, super.peek());
+    super.push(top);
   }
 
   get_max() {
     console.log(this.getMax());
-  }
-
-  push(item) {
-    const top = super.isEmpty() ? item : Math.max(item, this.getMax());
-    super.push(item);
   }
 
   pop() {
@@ -53,28 +60,23 @@ class StackMaxEffective extends Stack {
   }
 }
 
-function O() {
-  const stack = new StackMaxEffective();
-  for (let str of commands) {
-    const arr = str.split(' ');
-    if (arr.length === 2) {
-      const [fn, arg] = arr;
-      stack[fn](arg);
-    } else {
-      stack[arr[0]]();
-    }
+const fs = require('fs');
+const input = fs
+  .readFileSync('input.txt', 'utf-8')
+  .split('\n')
+  .slice(1)
+
+
+console.log(input);
+
+const stack = new StackMaxEffective();
+
+for (let str of input) {
+  const arr = str.split(' ');
+  if (arr.length === 2) {
+    const [fn, arg] = arr;
+    stack[fn](arg);
+  } else {
+    stack[arr[0]]();
   }
-  // stack.pop()
-  // stack.pop()
-
-  // stack.push(4)
-  // stack.push(-5)
-  // stack.push(7)
-  // stack.pop()
-  // stack.pop()
-
-  // stack.get_max()
-
-  // stack.pop()
-  // stack.get_max()
 }

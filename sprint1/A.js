@@ -1,5 +1,6 @@
 const fs = require('fs');
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
 const [a, x, b, c] = input[0].split(' ').map(Number);
 

@@ -1,8 +1,8 @@
 const fs = require('fs');
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
 let [w1, w2] = input;
-w1 = w1.slice(0, w1.length - 1);
 
 const max = w1.length > w2.length ? w1 : w2;
 const etalon = w1.length > w2.length ? w2 : w1;
@@ -16,11 +16,10 @@ for (let i = 0; i < max.length; i++) {
   }
 }
 
-
 function G(word1, word2) {
   const w1 = [...word1.toLowerCase()].sort().join('');
   const w2 = [...word2.toLowerCase()].sort().join('');
   return w1 === w2;
 }
 
-console.log(result)
+console.log(result);

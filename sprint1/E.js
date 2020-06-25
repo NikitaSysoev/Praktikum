@@ -1,5 +1,7 @@
 const fs = require('fs');
-const input = fs.readFileSync('input.txt', 'utf-8').split('\r\n');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
+
 const num = Number(input[0]);
 
 function transformToBinary(number) {

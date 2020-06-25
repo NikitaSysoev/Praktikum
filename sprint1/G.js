@@ -1,5 +1,6 @@
 const fs = require('fs');
-const [w1, w2] = fs.readFileSync('input.txt', 'utf-8').split('\r\n');
+const os = require('os');
+const [w1, w2] = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
 const map = new Map();
 

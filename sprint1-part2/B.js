@@ -1,46 +1,21 @@
-const readline = require('readline');
+const fs = require('fs');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
+let countRows = Number(input[0]);
+let countColumns = Number(input[1]);
+const matrix = input.slice(2).map((line) => [...line.split(' ').map(Number)]);
 
-let i = 0;
+const set = new Set();
 
-let countRows = 0;
-let countColumns = 0;
-const matrix = [];
-
-rl.on('line', (line) => {
-  i++;
-  if (i === 1) {
-    countRows = Number(line);
+for (let i = 0; i < countColumns; i++) {
+  let arr = [];
+  for (let j = 0; j < countRows; j++) {
+    arr.push(matrix[j][i]);
   }
-  if (i === 2) {
-    countColumns = Number(line);
-  }
-  if (i > 2) {
-    matrix.push([...line.split(' ').map(Number)]);
-  }
-  if (i === countRows + 2) {
-    B();
-    rl.close();
-  }
-});
+  set.add(arr);
+}
 
-function B() {
-  const set = new Set();
-
-  for (let i = 0; i < countColumns; i++) {
-    let arr = [];
-    for (let j = 0; j < countRows; j++) {
-      arr.push(matrix[j][i]);
-    }
-    set.add(arr);
-  }
-
-  for (const res of set.values()) {
-    console.log(res.join(' '));
-  }
+for (const res of set.values()) {
+  console.log(res.join(' '));
 }

@@ -1,73 +1,47 @@
-const readline = require('readline');
+const fs = require('fs');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
+let countRows = Number(input[0]);
+let countColumns = Number(input[1]);
+const matrix = input
+  .slice(2, countRows + 2)
+  .map((line) => [...line.split(' ').map(Number)]);
+const coords = input.slice(countRows + 2).map(Number);
 
-let i = 0;
+const [y, x] = coords;
 
-let countRows = 0;
-let countColumns = 0;
-const matrix = [];
-const coords = [];
+const right = x + 1;
+const left = x - 1;
+const down = y + 1;
+const up = y - 1;
 
-rl.on('line', (line) => {
-  i++;
-  if (i === 1) {
-    countRows = Number(line);
-  }
-  if (i === 2) {
-    countColumns = Number(line);
-  }
-  if (i > 2 && i <= countRows + 2) {
-    matrix.push([...line.split(' ').map(Number)]);
-  }
-  if (i >= countRows + 3) {
-    coords.push(line);
-  }
-  if (i === countRows + 4) {
-    D();
-    rl.close();
-  }
-});
+const arr = [];
 
-function D() {
-  const [y, x] = coords.map(Number);
+for (let i = 0; i < countRows; i++) {
+  for (let j = 0; j < countColumns; j++) {
+    if (j === x && i === up) {
+      arr.push(matrix[i][j]);
+    }
 
-  const right = x + 1;
-  const left = x - 1;
-  const down = y + 1;
-  const up = y - 1;
+    if (j === x && i === down) {
+      arr.push(matrix[i][j]);
+    }
 
-  const arr = [];
+    if (j === right && i === y) {
+      arr.push(matrix[i][j]);
+    }
 
-  for (let i = 0; i < countRows; i++) {
-    for (let j = 0; j < countColumns; j++) {
-      if (j === x && i === up) {
-        arr.push(matrix[i][j]);
-      }
-
-      if (j === x && i === down) {
-        arr.push(matrix[i][j]);
-      }
-
-      if (j === right && i === y) {
-        arr.push(matrix[i][j]);
-      }
-
-      if (j === left && i === y) {
-        arr.push(matrix[i][j]);
-      }
+    if (j === left && i === y) {
+      arr.push(matrix[i][j]);
     }
   }
-
-  arr.sort((a, b) => {
-    if (a < b) return -1;
-    if (a > b) return 1;
-    if (a === b) return 0;
-  });
-
-  console.log(arr.join(' '));
 }
+
+arr.sort((a, b) => {
+  if (a < b) return -1;
+  if (a > b) return 1;
+  if (a === b) return 0;
+});
+
+console.log(arr.join(' '));

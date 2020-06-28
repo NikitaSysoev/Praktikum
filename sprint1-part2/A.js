@@ -1,30 +1,7 @@
-const readline = require('readline');
+const fs = require('fs');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-let i = 0;
-let stop = 0;
-const list = [];
-
-rl.on('line', (line) => {
-  i++;
-  if (i === 1) {
-    stop = Number(line) + 1;
-  }
-  if (i > 1) {
-    list.push(line);
-  }
-  if (i === stop) {
-    A();
-    rl.close();
-  }
-});
-
-function A() {
-  const set = new Set(list);
-  for (let item of mySet.values()) console.log(item);
-}
+const list = input.slice(1);
+const set = new Set(list);
+for (let item of set.values()) console.log(item);

@@ -33,16 +33,14 @@ saturday.link(sunday);
 console.log(hasCycle(monday));
 
 function hasCycle(head) {
-  let current = head;
+  while (head.next !== null) {
+    head.passed = true;
+    head = head.next;
 
-  while (current.next !== null) {
-    current.passed = true;
-    current = current.next;
-
-    if (current.passed === true) {
+    if (head.passed === true) {
       break;
     }
   }
 
-  return current.passed ? 'True' : 'False';
+  return head.passed ? 'True' : 'False';
 }

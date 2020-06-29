@@ -1,18 +1,21 @@
 const fs = require('fs');
 const os = require('os');
-const [w1, w2] = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
+const [w1, w2] = input;
 const map = new Map();
 
 for (let s of w1) {
   map.set(s, (map.get(s) || 0) + 1);
 }
 
+let result = null;
+
 for (let s of w2) {
-  if (!map.get(s)) return 'False';
+  if (!map.get(s)) result = 'False';
   map.set(s, (map.get(s) || 0) - 1);
 }
 
-const result = [...map.values()].every((i) => i === 0);
+result = [...map.values()].every((i) => i === 0) ? 'True' : 'False';
 
-return result ? 'True' : 'False';
+console.log(result);

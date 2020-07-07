@@ -79,4 +79,26 @@ const n1 = new LinkedListNode('first', n2);
 
 let head = LinkedListNode.insertNode(n1, 2, '2.5');
 
-console.log(head.next.next);
+// console.log(head.next.next);
+
+const states_needed = new Set(['mt', 'wa', 'or', 'tg', 'nv', 'ut', 'lp', 'az']);
+const stations = {};
+stations['kone'] = new Set(['tg', 'nv', 'ut']);
+stations['ktwo'] = new Set(['wa', 'tg', 'mt']);
+stations['kthree'] = new Set(['or', 'nv', 'lp']);
+stations['kfour'] = new Set(['nv', 'ut']);
+stations['kfive'] = new Set(['lp', 'az']);
+const final_stations = new Set();
+
+let best_station = null;
+let states_covered = new Set();
+
+let n = 0;
+Object.entries(stations).forEach(([name, set]) => {
+  if(set.size > n){
+    n = set.size;
+    best_station = name;
+  }
+})
+
+console.log(best_station)

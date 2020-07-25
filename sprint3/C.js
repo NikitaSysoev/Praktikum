@@ -17,7 +17,9 @@ function quickSort(array, left = 0, right = array.length - 1) {
       r--;
     }
     if (l <= r) {
-      [array[l], array[r]] = [array[r], array[l]];
+      tmp = array[l];
+      array[l] = array[r];
+      array[r] = tmp;
       l++;
       r--;
     }

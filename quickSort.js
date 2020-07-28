@@ -1,3 +1,5 @@
+// в лучшем случае log(n) * n
+
 function quickSort(array) {
   if (array.length < 2) {
     return array;

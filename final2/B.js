@@ -5,6 +5,34 @@ const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 const value = Number(input[1]);
 const arr = input[2].split(' ').map(Number);
 
+// 1 вариант
+function binarySearch(arr, value, left = 0, right = arr.length - 1) {
+  const midIndex = Math.floor((left + right) / 2);
+
+  if (arr[midIndex] === value) {
+    return midIndex;
+  }
+
+  if (arr[left] === value) {
+    return left;
+  }
+
+  if (arr[right] === value) {
+    return right;
+  }
+
+  left++;
+  right--;
+
+  if (left >= right) {
+    return -1;
+  }
+
+  return binarySearch(arr, value, left, right);
+}
+
+
+// 2 вариант
 function binarySearch(arr, value, left = 0, right = arr.length - 1) {
   const midIndex = Math.floor((left + right) / 2);
 
@@ -16,7 +44,7 @@ function binarySearch(arr, value, left = 0, right = arr.length - 1) {
     return -1;
   }
 
-  return arr.includes(value, midIndex + 1)
+  return new Set(arr.slice(midIndex + 1)).has(value)
     ? binarySearch(arr, value, midIndex + 1, right)
     : binarySearch(arr, value, left, midIndex - 1);
 }

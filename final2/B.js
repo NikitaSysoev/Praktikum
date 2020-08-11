@@ -6,7 +6,7 @@ const value = Number(input[1]);
 const arr = input[2].split(' ').map(Number);
 
 // 1 вариант
-function binarySearch(arr, value, left = 0, right = arr.length - 1) {
+function binarySearch1(arr, value, left = 0, right = arr.length - 1) {
   const midIndex = Math.floor((left + right) / 2);
 
   if (arr[midIndex] === value) {
@@ -28,12 +28,12 @@ function binarySearch(arr, value, left = 0, right = arr.length - 1) {
     return -1;
   }
 
-  return binarySearch(arr, value, left, right);
+  return binarySearch1(arr, value, left, right);
 }
 
 
 // 2 вариант
-function binarySearch(arr, value, left = 0, right = arr.length - 1) {
+function binarySearch2(arr, value, left = 0, right = arr.length - 1) {
   const midIndex = Math.floor((left + right) / 2);
 
   if (arr[midIndex] === value) {
@@ -45,8 +45,8 @@ function binarySearch(arr, value, left = 0, right = arr.length - 1) {
   }
 
   return new Set(arr.slice(midIndex + 1)).has(value)
-    ? binarySearch(arr, value, midIndex + 1, right)
-    : binarySearch(arr, value, left, midIndex - 1);
+    ? binarySearch2(arr, value, midIndex + 1, right)
+    : binarySearch2(arr, value, left, midIndex - 1);
 }
 
-console.log(binarySearch(arr, value));
+console.log(binarySearch2(arr, value));

@@ -95,10 +95,25 @@ let states_covered = new Set();
 
 let n = 0;
 Object.entries(stations).forEach(([name, set]) => {
-  if(set.size > n){
+  if (set.size > n) {
     n = set.size;
     best_station = name;
   }
-})
+});
 
-console.log(best_station)
+// console.log(best_station)
+
+function noticeIndex(arr) {
+  arr.sort().reverse();
+  let index = 0;
+  for (let i of arr) {
+    if (i > index) {
+      index++;
+    } else {
+      break;
+    }
+  }
+  return index;
+}
+
+console.log(noticeIndex([3, 0, 4, 1, 5]));

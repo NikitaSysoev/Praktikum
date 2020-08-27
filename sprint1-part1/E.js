@@ -6,14 +6,14 @@ const num = Number(input[0]);
 
 function transformToBinary(number) {
   const divider = 2;
-  let binaryNumber = ``;
+  let binaryNumber = '';
 
   while (number > 0) {
     binaryNumber += number % divider;
     number = parseInt(number / divider);
   }
 
-  return binaryNumber.split(``).reverse().join(``);
+  return binaryNumber.split('').reverse().join('');
 }
 
 const result = transformToBinary(num);

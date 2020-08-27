@@ -116,4 +116,6 @@ function noticeIndex(arr) {
   return index;
 }
 
-console.log(noticeIndex([3, 0, 4, 1, 5]));
+// console.log(noticeIndex([3, 0, 4, 1, 5]));
+
+

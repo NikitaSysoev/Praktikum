@@ -36,27 +36,39 @@
 //   },
 // };
 
+Array.prototype.flat = function () {
+  let result = [];
+  for (let x of this) {
+    if (Array.isArray(x)) {
+      result = result.concat(x.flat());
+    } else {
+      result.push(x);
+    }
+  }
+  return result;
+};
+
 function Solution(root) {
-    let queue = [];
-    const values = [];
-    queue.push(root);
+  let queue = [];
+  const values = [];
+  queue.push(root);
 
-    while (queue.length > 0) {
-      const result = queue.map((item) => item.value);
-      values.push(result);
-      const arr = [...queue];
-      queue = [];
+  while (queue.length > 0) {
+    const result = queue.map((item) => item.value);
+    values.push(result);
+    const arr = [...queue];
+    queue = [];
 
-      for (let node of arr) {
-        if (node.left) {
-          queue.push(node.left);
-        }
-        if (node.right) {
-          queue.push(node.right);
-        }
+    for (let node of arr) {
+      if (node.left) {
+        queue.push(node.left);
+      }
+      if (node.right) {
+        queue.push(node.right);
       }
     }
-    return values.map((item) => item.slice(0, 1)).flat(Infinity);
+  }
+  return values.map((item) => item.slice(0, 1)).flat();
 }
 
 // console.log(Solution(obj2));

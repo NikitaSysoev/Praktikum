@@ -34,13 +34,13 @@ console.log(hasCycle(monday));
 
 function hasCycle(head) {
   while (head.next !== null) {
-    head.passed = true;
+    head.shoted = true;
     head = head.next;
 
-    if (head.passed === true) {
+    if (head.shoted === true) {
       break;
     }
   }
 
-  return head.passed ? 'True' : 'False';
+  return head.shoted ? 'True' : 'False';
 }

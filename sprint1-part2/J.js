@@ -61,13 +61,8 @@ class StackMaxEffective extends Stack {
 }
 
 const fs = require('fs');
-const input = fs
-  .readFileSync('input.txt', 'utf-8')
-  .split('\n')
-  .slice(1)
-
-
-console.log(input);
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL).slice(1);
 
 const stack = new StackMaxEffective();
 

@@ -1,29 +1,32 @@
-const readline = require('readline');
-const { Stack } = require('../Stack');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-let i = 0;
-let n = 0;
-const commands = [];
-
-rl.on('line', (line) => {
-  i++;
-  if (i === 1) {
-    n = Number(line);
+class Stack {
+  constructor() {
+    this.items = [];
   }
-  if (i > 1) {
-    commands.push(line);
+
+  push(item) {
+    this.items.push(item);
   }
-  if (i === n + 1) {
-    I();
-    rl.close();
+
+  pop() {
+    return this.items.pop();
   }
-});
+
+  peek() {
+    return this.items[this.size() - 1];
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  reverse() {
+    this.items.reverse();
+  }
+}
 
 class StackMax extends Stack {
   constructor() {
@@ -50,14 +53,19 @@ class StackMax extends Stack {
   }
 }
 
-function I() {
-  const stack = new StackMax();
-  for (let str of commands) {
-    const arr = str.split(' ');
-    if (arr.length === 2) {
-      const [fn, arg] = arr;
-      stack[fn](arg);
-    } else {
+const fs = require('fs');
+const os = require('os');
+const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
+const commands = input.slice(1);
+
+const stack = new StackMax();
+for (let str of commands) {
+  const arr = str.split(' ');
+  if (arr.length === 2) {
+    const [fn, arg] = arr;
+    stack[fn](arg);
+  } else {
+    if (typeof stack[arr[0]] === 'function') {
       stack[arr[0]]();
     }
   }

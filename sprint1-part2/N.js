@@ -1,4 +1,4 @@
-class MyQueue {
+class MyQueueSized {
   constructor(maxN) {
     this.queue = Array(maxN).fill(null);
     this.head = 0;
@@ -46,24 +46,32 @@ const fs = require('fs');
 const os = require('os');
 const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-const queue = new MyQueue(Number(input[0]));
-const commands = input.slice(1);
+const queue = new MyQueueSized(Number(input[1]));
+const commands = input.slice(2);
 
 for (let str of commands) {
-  const arr = str.split(' ');
-  if (arr[0] === 'size' || arr[0] === 'peek' || arr[0] === 'pop') {
-    console.log(queue[arr[0]]());
-  } else {
-    const [fn, arg] = arr;
-    if (arg) {
-      const x = queue[fn](arg);
-      if (x) {
-        console.log(x);
-      }
-    } else {
+  const [fn, arg] = str.split(' ');
+  switch (fn) {
+    case 'size':
+      console.log(queue[fn]());
+      break;
+    case 'peek':
+      console.log(queue[fn]());
+      break;
+    case 'pop':
+      console.log(queue[fn]());
+      break;
+    case 'push':
       if (typeof queue[fn] === 'function') {
-        queue[fn]();
+        if (arg) {
+          const x = queue[fn](arg);
+          if (x) {
+            console.log(x);
+          }
+        } else {
+          queue[fn](arg);
+        }
       }
-    }
+      break;
   }
 }

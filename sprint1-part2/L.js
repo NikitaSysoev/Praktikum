@@ -1,17 +1,3 @@
-const readline = require('readline');
-const { Stack } = require('../Stack');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
-
-rl.on('line', (line) => {
-  L(line);
-  rl.close();
-});
-
 // Использование стека позволяет улучшить этот алгоритм — встреченная закрывающая скобка должна быть парной к последней встреченной открывающей, после чего их необходимо удалить
 // Для хранения открывающих скобок будем использовать стек.
 // Пройдем по строке от начала до конца. Если очередной символ — открывающая скобка, то добавляем ее в стек.
@@ -21,6 +7,38 @@ rl.on('line', (line) => {
 // После окончания работы алгоритма стек должен остаться пустым.
 // Если стек не пуст — это означает, что некоторые открывающие скобки не были закрыты,
 // то есть последовательность не является правильной.
+
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+
+  push(item) {
+    this.items.push(item);
+  }
+
+  pop() {
+    return this.items.pop();
+  }
+
+  peek() {
+    return this.items[this.size() - 1];
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+}
+
+const fs = require('fs');
+const os = require('os');
+const [line] = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
+
+L(line);
 
 function L(line) {
   if (line === '') {

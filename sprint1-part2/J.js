@@ -72,6 +72,8 @@ for (let str of input) {
     const [fn, arg] = arr;
     stack[fn](arg);
   } else {
-    stack[arr[0]]();
+    if (typeof stack[arr[0]] === 'function') {
+      stack[arr[0]]();
+    }
   }
 }

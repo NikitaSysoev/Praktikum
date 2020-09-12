@@ -1,74 +1,38 @@
-const fs = require('fs');
-const os = require('os');
-const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
-
-class LinkedListNode {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-    this.prev = null;
-  }
-}
-
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-  }
-
-  addNode(value) {
-    const node = new LinkedListNode(value);
-
-    if (this.length) {
-      this.tail.next = node;
-      node.prev = this.tail;
-      this.tail = node;
-    } else {
-      this.head = node;
-      this.tail = node;
-    }
-
-    this.length++;
-
-    return node;
-  }
-
-  popNode() {
-    const value = this.tail.value;
-    this.tail = this.tail.prev;
-    this.length--;
-    return value;
-  }
-}
-
 class StackSet {
   constructor() {
     this.set = new Set();
-    this.last = new LinkedList(null);
+    this.last = null;
   }
 
   push(item) {
     if (!this.set.has(item)) {
+      this.last = item;
       this.set.add(item);
-      this.last.addNode(item);
     }
   }
 
   pop() {
     if (this.isEmpty()) {
-      return 'error';
+      console.log('error');
+      return;
     }
 
-    const item = this.last.popNode();
-    this.set.delete(item);
+    const iterator = this.set.values();
+    let i = 0;
+    while (i !== this.set.size - 1) {
+      i++;
+      this.last = iterator.next().value;
+    }
+
+    // this.last = arr[arr.length - 2] || null;
+    this.set.delete(iterator.next().value);
   }
 
   peek() {
     if (this.isEmpty()) {
       return 'error';
     }
-    return this.last.tail.value;
+    return Number(this.last);
   }
 
   size() {
@@ -80,37 +44,48 @@ class StackSet {
   }
 }
 
-// const readline = require('readline');
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout,
-//   terminal: false,
-// });
-
-// let i = 0;
-// let n = 0;
-// const commands = [];
-const stack = new StackSet();
-
-// rl.on('line', (line) => {
-//   i++;
-//   if (i === 1) {
-//     n = Number(line);
-//   }
-//   if (i > 1) {
-//     commands.push(line);
-//   }
-//   if (i === n + 1) {
-//     K();
-//     rl.close();
-//   }
-// });
-
-const result = [];
-
-input.slice(1).forEach((c) => {
-  const [fn, arg] = c.split(' ');
-  result.push(stack[fn](arg));
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false,
 });
 
-console.log(result.filter(Boolean).map(String).join(os.EOL));
+let i = 0;
+let n = 0;
+const commands = [];
+const stack = new StackSet();
+
+rl.on('line', (line) => {
+  i++;
+  if (i === 1) {
+    n = Number(line);
+  }
+  if (i > 1) {
+    commands.push(line);
+  }
+  if (i === n + 1) {
+    K();
+    rl.close();
+  }
+});
+
+// const fs = require('fs');
+// const os = require('os');
+// const commands = fs.readFileSync('input.txt', 'utf-8').split(os.EOL).slice(1);
+
+function K() {
+  for (let str of commands) {
+    const arr = str.split(' ');
+    if (arr[0] === 'size' || arr[0] === 'peek') {
+      console.log(stack[arr[0]]());
+    } else {
+      const [fn, arg] = arr;
+      if (arg) {
+        stack[fn](arg);
+      } else {
+        stack[fn]();
+      }
+    }
+  }
+}

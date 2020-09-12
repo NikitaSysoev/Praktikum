@@ -2,21 +2,23 @@ const fs = require('fs');
 const os = require('os');
 const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-const set = new Set();
+const hash = {};
+let str = input[0];
+let start, end, bestStart, best;
+start = end = bestStart = best = 0;
 
-let longestOverAll = '';
-let longestTillNow = '';
+while (end < str.length) {
 
-for (let s of input[0]) {
-  if (set.has(s)) {
-    longestTillNow = '';
-    set.clear();
+  while (hash[str[end]]) {
+    hash[str[start++]] = 0;
   }
-  longestTillNow += s;
-  set.add(s);
-  if (longestTillNow.length > longestOverAll.length) {
-    longestOverAll = longestTillNow;
+
+  hash[str[end]] = 1;
+
+  if (++end - start > best) {
+    bestStart = start;
+    best = end - start;
   }
+
 }
-
-console.log(longestOverAll.length);
+console.log(str.substr(bestStart, best).length);

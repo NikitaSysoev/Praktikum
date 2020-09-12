@@ -2,21 +2,21 @@ const fs = require('fs');
 const os = require('os');
 const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-const res = input[0].split('').reduce(
-  (acc, item) => {
-    if (acc.prev.includes(item)) {
-      acc.set.push(acc.prev.length);
-      acc.prev = item;
-    } else {
-      acc.prev += item;
-    }
-    return acc;
-  },
-  { prev: '', set: [] },
-);
+const set = new Set();
 
-if (res.set.length) {
-  console.log(Math.max.apply(null, res.set));
-} else {
-  console.log(res.prev.length);
+let longestOverAll = '';
+let longestTillNow = '';
+
+for (let s of input[0]) {
+  if (set.has(s)) {
+    longestTillNow = '';
+    set.clear();
+  }
+  longestTillNow += s;
+  set.add(s);
+  if (longestTillNow.length > longestOverAll.length) {
+    longestOverAll = longestTillNow;
+  }
 }
+
+console.log(longestOverAll.length);

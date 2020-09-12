@@ -1,3 +1,16 @@
+const os = require('os');
+
+function solution(head) {
+  let curr = head;
+  const result = [];
+  while (curr.next !== null) {
+    result.push(curr.value);
+    curr = curr.next;
+  }
+  result.push(curr.value);
+  console.log(result.join(os.EOL));
+}
+
 // class Node {
 //   constructor(value = null, next = null) {
 //     this.value = value;
@@ -9,13 +22,4 @@
 // const eat = new Node('eat', sleep);
 // const awake = new Node('awake', eat);
 
-function Solution(head) {
-  let curr = head;
-  while (curr.next !== null) {
-    console.log(curr.value);
-    curr = curr.next;
-  }
-  console.log(curr.value);
-}
-
-// Solution(awake);
+// solution(awake);

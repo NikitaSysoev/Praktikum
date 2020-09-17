@@ -1,6 +1,6 @@
 class MyQueueSized {
   constructor(maxN) {
-    this.queue = Array(maxN).fill(null);
+    this.queue = [];
     this.head = 0;
     this.tail = 0;
     this.length = 0;
@@ -14,7 +14,7 @@ class MyQueueSized {
   push(item) {
     if (this.length !== this.maxN) {
       this.queue[this.tail] = item;
-      this.tail = (this.tail + 1) % this.maxN;
+      this.tail++;
       this.length++;
     } else {
       return 'error';
@@ -27,7 +27,7 @@ class MyQueueSized {
     } else {
       const x = this.queue[this.head];
       this.queue[this.head] = null;
-      this.head = (this.head + 1) % this.maxN;
+      this.head++;
       this.length--;
       return x;
     }
@@ -50,28 +50,20 @@ const queue = new MyQueueSized(Number(input[1]));
 const commands = input.slice(2);
 
 for (let str of commands) {
-  const [fn, arg] = str.split(' ');
-  switch (fn) {
-    case 'size':
-      console.log(queue[fn]());
-      break;
-    case 'peek':
-      console.log(queue[fn]());
-      break;
-    case 'pop':
-      console.log(queue[fn]());
-      break;
-    case 'push':
-      if (typeof queue[fn] === 'function') {
-        if (arg) {
-          const x = queue[fn](arg);
-          if (x) {
-            console.log(x);
-          }
-        } else {
-          queue[fn](arg);
-        }
+  const arr = str.split(' ');
+  if (arr[0] === 'size' || arr[0] === 'peek' || arr[0] === 'pop') {
+    console.log(queue[arr[0]]());
+  } else {
+    const [fn, arg] = arr;
+    if (arg) {
+      const x = queue[fn](arg);
+      if (x) {
+        console.log(x);
       }
-      break;
+    } else {
+      if (typeof queue[fn] === 'function') {
+        queue[fn]();
+      }
+    }
   }
 }

@@ -16,7 +16,7 @@ function binarySearch(arr, value, left = 0, right = arr.length - 1) {
     return -1;
   }
 
-  return arr.includes(value, midIndex + 1)
+  return new Set(arr.slice(midIndex + 1)).has(value)
     ? binarySearch(arr, value, midIndex + 1, right)
     : binarySearch(arr, value, left, midIndex - 1);
 }

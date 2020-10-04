@@ -2,19 +2,29 @@ const fs = require('fs');
 const os = require('os');
 const [n, k] = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-function makeid(n, k, text = '0') {
-  if (text[k - 1]) {
+function solution(n, k, text = '0') {
+  let mid = Math.floor(text.length / 2);
+
+  if (n === 0) {
     return text[k - 1];
   }
-  text = text.split('0').join('0x');
-  text = text.split('1').join('10');
-  text = text.split('x').join('1');
+
+  if(text === '0'){
+    return solution(n - 1, k, '01');
+  }
+
+  let second = text.slice(mid);
+  second = second.split('0').join('0x');
+  second = second.split('1').join('10');
+  second = second.split('x').join('1');
+
+  text = text + second;
 
   if (text[k - 1]) {
     return text[k - 1];
   }
 
-  return makeid(n - 1, k, text);
+  return solution(n - 1, k, text);
 }
 
-console.log(makeid(n, k));
+console.log(solution(n, k));

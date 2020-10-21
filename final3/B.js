@@ -2,19 +2,29 @@ const fs = require('fs');
 const os = require('os');
 const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
-const n = input[2].split(' ').map(Number);
-const m = input[3].split(' ').map(Number);
-
-const len = n.length + m.length;
-const even = len % 2 === 0;
+const arr1 = input[2].split(' ').map(Number);
+const arr2 = input[3].split(' ').map(Number);
 
 function solution(arr1, arr2) {
-  const arr = arr1.concat(arr2);
-  arr.sort((a, b) => a - b);
-
-  return even
-    ? (arr[Math.floor(len / 2) - 1] + arr[Math.ceil(len / 2)]) / 2
-    : arr[Math.floor(len / 2)];
+  let p1 = arr1.length;
+  let p2 = arr2.length;
+  let n = p1 + p2;
+  if (n === 0) n--;
+  let med = 0;
+  p1--;
+  p2--;
+  while (0 < n) {
+    if (p2 < 0 || (p1 >= 0 && arr1[p1] > arr2[p2])) med = arr1[p1--];
+    else med = arr2[p2--];
+    n -= 2;
+  }
+  if (0 == n) {
+    if (p2 < 0 || (p1 >= 0 && arr1[p1] > arr2[p2])) med = med + arr1[p1];
+    else med = med + arr2[p2];
+    med /= 2;
+  }
+  return med;
 }
 
-console.log(solution(n, m));
+console.log(solution(arr1, arr2));
+// 37311710

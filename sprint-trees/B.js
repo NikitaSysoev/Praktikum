@@ -70,44 +70,35 @@
 //   },
 // };
 
-function Solution(root) {
-  if (root === null) {
+function Solution(node) {
+  function checkHeight(node) {
+    if (node === null) {
+      return 0;
+    }
+    let leftHeight = checkHeight(node.left);
+    let rightHeight = checkHeight(node.right);
+    let diff = leftHeight - rightHeight;
+    if (Math.abs(diff) > 1) {
+      return -1;
+    } else {
+      return Math.max(leftHeight, rightHeight) + 1;
+    }
+  }
+
+  function isBalanced(node) {
+    if (node === null) {
+      return true;
+    }
+    if (checkHeight(node) === -1) {
+      return false;
+    } else {
+      return isBalanced(node.left) && isBalanced(node.right);
+    }
+  }
+
+  if (isBalanced(node)) {
+    return 'True';
+  } else {
     return 'False';
   }
-  if (root.left === null && root.right === null) {
-    return 'False';
-  }
-  function calc(root) {
-    let queue = [];
-    const values = [];
-    if (root !== null) {
-      queue.push(root);
-    }
-
-    while (queue.length > 0) {
-      const result = queue.map((item) => item.value);
-      values.push(result);
-      const arr = [...queue];
-      queue = [];
-
-      for (let node of arr) {
-        if (node.left) {
-          queue.push(node.left);
-        }
-        if (node.right) {
-          queue.push(node.right);
-        }
-      }
-    }
-    return values;
-  }
-
-  const leftLength = calc(root.left).length;
-  const rightLength = calc(root.right).length;
-
-  const degree = Math.abs(leftLength - rightLength);
-
-  return degree < 2 ? 'True' : 'False';
 }
-
-// console.log(Solution(obj3));

@@ -17,3 +17,4 @@ function solution(num) {
 }
 
 console.log(solution(n));
+// 39509740

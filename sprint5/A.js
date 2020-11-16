@@ -4,6 +4,8 @@ const input = fs.readFileSync('input.txt', 'utf-8').split(os.EOL);
 
 const number = +input[0];
 
+let i = 0;
+
 function solution(n) {
   const obj = {
     0: 0,
@@ -18,7 +20,7 @@ function solution(n) {
     9: 81,
   };
 
-  if (String(n).length === 1) {
+  if (i > 0 && String(n).length === 1) {
     return n === 1 ? 'True' : 'False';
   }
 
@@ -27,6 +29,7 @@ function solution(n) {
     .reduce((acc, item) => {
       return acc + obj[item];
     }, 0);
+  i++;
   return solution(sum);
 }
 

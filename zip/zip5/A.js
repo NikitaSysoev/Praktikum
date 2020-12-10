@@ -54,5 +54,3 @@ for (let i = 2; i < requestsNum + 2; i++) {
     console.log(handleGetRequest(url));
   }
 }
-
-// 43724481

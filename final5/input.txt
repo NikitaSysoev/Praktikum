@@ -1,7 +1,11 @@
-1000007
-5
-post https://yandex.com/images/programming/image_id_sbcjsdbjb7486584ehjvbdf
-post https://yandex.com/images/cats/image_id_sbcjsdbjb7486584ehjddfv7f7
-get https://prakti.kum/4C99
-get https://prakti.kum/4C100
-post https://yandex.com/images/programming/image_id_sbcjsdbjb7486584ehjvbdf
+10
+put 1 2
+put 2 4
+put 3 6
+get 3
+delete 4
+put 3 7
+get 3
+delete 1
+get 1
+get 2

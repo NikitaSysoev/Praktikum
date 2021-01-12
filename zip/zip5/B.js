@@ -10,13 +10,18 @@ class Node {
   }
 }
 
+const MAX_TABLE_SIZE = 1000;
+const PRIME_NUMBER = 1009;
+const koeffA = 1 + Math.floor(Math.random() * (PRIME_NUMBER - 1));
+const koeffB = Math.floor(Math.random() * (PRIME_NUMBER - 1));
+
 class HashTable {
   constructor() {
     this.table = new Array(1000).fill(null);
   }
 
   calcHash(key) {
-    return (key % 997) + 1;
+    return ((koeffA * key + koeffB) % PRIME_NUMBER) % MAX_TABLE_SIZE;
   }
 
   find(key, node) {
@@ -98,4 +103,4 @@ for (let i = 1; i < input.length; i++) {
   }
 }
 
-// 44646459
+// 45562257
